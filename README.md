@@ -135,3 +135,86 @@ run;
 
 
 
+
+proc import datafile= "/home/u64263069/faers/THER22Q2.sav"
+dbms=sav
+out=xyz
+;
+run;
+
+data faers.xyz (keep=primaryid caseid);
+set xyz;
+run;
+
+libname faers "/home/u64263069/faers";
+
+
+data xyz;
+input a b c;
+cards;
+10 20 30 
+40 50 60 
+70 80 90
+;
+run;
+
+
+
+proc print;
+run;
+
+proc contents data=xyz;
+run;
+
+proc contents data=sashelp._all_
+out=karan;
+run;
+
+data faers.karan;
+set karan
+;
+run;
+
+libname faers"/home/u64263069/faers";
+
+proc contents data=sashelp.class
+varnum
+;
+run;
+
+proc print data=sashelp.class;
+run;
+
+proc print data=sashelp.class double;
+run;
+
+proc print data=sashelp.class double width=full;
+run;
+
+proc print data=sashelp.class double width=full;
+var name age sex;
+run;
+
+proc print data=sashelp.class double width=full;
+var name age;
+label name="studentid";
+run;
+
+proc print data="/home/u64263069/faers/outc24q1.sas7bdat";
+run;
+
+proc print data=sashelp.class double width=full split="#";
+var name age;
+label name="studentid";
+run;
+
+proc print data="/home/u64263069/faers/outc24q1.sas7bdat";
+run;
+
+
+proc print data=sashelp.class heading=vertical;
+run;
+
+proc print data=sashelp.class heading=vertical noobs;
+run;
+
