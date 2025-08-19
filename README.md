@@ -212,9 +212,173 @@ proc print data="/home/u64263069/faers/outc24q1.sas7bdat";
 run;
 
 
+
+data karan;
+input sno name$ age sex$;
+cards;
+1 karan 27 M
+2 Arpan 25 F
+3 janvi 20 F 
+4 mishra 24 M
+5 mukul 27 M
+6 Gargi 25 F
+;
+run;
+
+proc print data=karan;
+run;
+
+proc format;
+value kumar
+1 = "smart"
+2 = "bhola"
+3 = "jwak"
+4 = "sanskar"
+5 = "disciplined"
+6 = "okthenbyee"
+;
+run;
+
+proc print data=karan;
+format sno kumar.;
+run;
+
+
 proc print data=sashelp.class heading=vertical;
 run;
 
 proc print data=sashelp.class heading=vertical noobs;
 run;
 
+data karan;
+input sno name$ age sex;
+cards;
+1 karan 27 7
+2 Arpan 25 8
+3 janvi 20 9 
+4 mishra 24 10
+5 mukul 27 11
+6 Gargi 25 12
+;
+run;
+
+proc print data=karan;
+run;
+
+proc format;
+value kumar
+1 = "smart"
+2 = "bhola"
+3 = "jwak"
+4 = "sanskar"
+5 = "disciplined"
+6 = "okthenbyee"
+
+value varun
+
+7 = "male"
+8 = "female"
+9 = "female"
+10 = "male"
+11 = "male"
+12 = "female"
+;
+run;
+
+proc print data=karan;
+format sno kumar. sex varun.;
+run;
+
+
+
+
+data kkm;
+input sno name$ character$;
+datalines;
+12 karan A
+13 Arpan B
+;
+run;
+
+proc print;
+run;
+
+proc format
+value krn$
+"A"= "kjl"
+"B"= "jkl"
+;
+run;
+
+
+
+data hpt;
+input pid age pulses;
+cards;
+12 27 98.5
+13 25 99.26
+14 26 97.50
+15 28 null
+;
+run;
+
+proc format;
+value $hyp 'null'=00.00;
+run;
+
+proc print data=hpt;
+format pulses hpt4.;
+run;
+
+
+proc print data=sashelp.heart;
+run;
+
+title "my heart patient data";
+proc print data=sashelp.heart;
+run;
+
+title;
+proc print data=sashelp.heart;
+run;
+
+title1 "abc";
+title2 "xyz";
+title10 "obc";
+proc print data=sashelp.heart;
+run;
+
+
+title1 "abc";
+title2 "xyz";
+title10 "obc";
+footnote1 "klm";
+footnote2 "jkl";
+footnote3 "lmn";
+proc print data=sashelp.heart;
+run;
+
+
+options nodate nocenter nodate;
+title;
+proc print data=sashelp.class;
+run;
+
+options nodate nocenter nodate ls=200;
+title;
+proc print data=sashelp.class;
+run;
+
+
+
+options nodate nocenter nodate ls=200 ps=max;
+title;
+proc print data=sashelp.class;
+run;
+
+
+
+options nodate nocenter nodate ls=200 ps=max missing="" obs=10;
+title;
+proc print data=sashelp.class;
+run;
