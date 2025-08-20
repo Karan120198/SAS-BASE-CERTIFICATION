@@ -377,8 +377,61 @@ proc print data=sashelp.class;
 run;
 
 
-
 options nodate nocenter nodate ls=200 ps=max missing="" obs=10;
 title;
 proc print data=sashelp.class;
 run;
+
+
+
+
+proc sort data=sashelp.class out=kk;
+by age;
+run;
+
+proc sort data=sashelp.class out=kl;
+by sex;
+run;
+
+proc sort data=sashelp.class out=pl;
+by sex age;
+run;
+
+proc sort data=sashelp.class(keep=age sex height) out=ml;
+by age sex height;
+run;
+
+proc print data=ml;
+run;
+
+
+
+data afunct;
+input x;
+cards;
+98.99
+99.99
+97.55
+67.66
+88.777
+-10.99
+;
+data afuncti;
+set afunct;
+It=int(x);
+R1=round(x);
+R2=round(x,-1);
+C=ceil(x);
+F=floor(x);
+Ab=abs(x);
+Lg=log(x);
+Lg1=log10(x);
+Lg2=Lag(x);
+Md=mod(x,2);
+run;
+
+
+
+
+
+
