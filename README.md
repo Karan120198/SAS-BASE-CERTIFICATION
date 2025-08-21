@@ -431,6 +431,125 @@ Md=mod(x,2);
 run;
 
 
+data karan;
+input pid name$ age sex$;
+cards;
+1 karan 27 M
+2 arpan 25 F 
+3 janvi 20 F 
+4 mishra 24 M 
+5 Gargi 25 F 
+;
+run;
+
+proc sort data=karan;
+by age descending sex;
+run;
+
+proc sort data=karan nodupkey;
+by name;
+run;
+
+
+data karan;
+length name $3;
+input pid name$ age sex$;
+cards;
+1 karan 27 M
+2 arpan 25 F 
+3 janvi 20 F 
+4 mishra 24 M 
+5 Gargi 25 F 
+;
+run;
+
+proc sort data=karan;
+by age descending sex;
+run;
+
+proc sort data=karan nodupkey;
+by name;
+run;
+
+
+
+DATA sales_summary;
+   SET sales_sorted;
+   BY Region;
+   IF FIRST.Region THEN TotalSales=0; /* reset at start of group */
+   TotalSales + Sales; /* sum sales for the group */
+   IF LAST.Region THEN OUTPUT; /* only output last row with total */
+RUN;
+
+DATA cumulative_sales;
+   SET sales_sorted;
+   BY Region;
+   RETAIN CumSales; /* keeps value from previous row */
+   IF FIRST.Region THEN CumSales=0;
+   CumSales + Sales; /* sum sales cumulatively */
+RUN;
+
+PROC PRINT DATA=cumulative_sales;
+RUN;
+
+DATA sales;
+   LENGTH Region $5;
+   INPUT Region $ Sales;
+DATALINES;
+East 100
+East 200
+West 150
+West 300
+;
+RUN;
+
+/* Step 1: Sort by Region */
+PROC SORT DATA=sales OUT=sales_sorted;
+   BY Region;
+RUN;
+
+/* Step 2: Summarize with FIRST./LAST. and RETAIN */
+DATA sales_summary;
+   SET sales_sorted;
+   BY Region;
+   FORMAT TotalSales CumSales comma6.;
+   IF FIRST.Region THEN TotalSales=0;
+   TotalSales + Sales;
+   RETAIN CumSales;
+   IF FIRST.Region THEN CumSales=0;
+   CumSales + Sales;
+   IF LAST.Region THEN OUTPUT;
+RUN;
+
+PROC PRINT DATA=sales_summary;
+RUN;
+
+
+data karan;
+input pid name$ age sex$;
+cards;
+1 karan 27 Male
+2 arpan 25 Female 
+3 janvi 20 Female
+4 mishra 24 Male
+5 gargi 25 Female
+;
+run;
+
+PROC SORT DATA=karan;
+   BY name;
+RUN;
+
+PROC TRANSPOSE DATA=karan OUT=karan_out;
+   BY name;
+   ID age;
+   var sex;
+  
+RUN;
+
+
+
+
 
 
 
